@@ -1,0 +1,693 @@
+{
+  "$comment": "Snapshot of Mexican SPEI participant bank codes used to resolve CLABE bank names. The authoritative, continuously-updated source is Banxico; refresh this file from there rather than editing code.",
+  "authoritativeSource": "https://www.banxico.org.mx/cep-scl/listaInstituciones.do",
+  "seededFrom": "https://github.com/center-key/clabe-validator (src/clabe.ts banksMap)",
+  "retrievedOn": "2026-07-01",
+  "institutions": [
+    {
+      "code": "001",
+      "shortName": "BANXICO",
+      "longName": "Banco de México"
+    },
+    {
+      "code": "002",
+      "shortName": "BANAMEX",
+      "longName": "Banco Nacional de México"
+    },
+    {
+      "code": "006",
+      "shortName": "BANCOMEXT",
+      "longName": "Banco Nacional de Comercio Exterior"
+    },
+    {
+      "code": "009",
+      "shortName": "BANOBRAS",
+      "longName": "Banco Nacional de Obras y Servicios Públicos"
+    },
+    {
+      "code": "012",
+      "shortName": "BBVA BANCOMER",
+      "longName": "BBVA Bancomer"
+    },
+    {
+      "code": "014",
+      "shortName": "SANTANDER",
+      "longName": "Banco Santander"
+    },
+    {
+      "code": "019",
+      "shortName": "BANJERCITO",
+      "longName": "Banco Nacional del Ejército, Fuerza Aérea y Armada"
+    },
+    {
+      "code": "021",
+      "shortName": "HSBC",
+      "longName": "HSBC México"
+    },
+    {
+      "code": "022",
+      "shortName": "GE MONEY",
+      "longName": "GE Money Bank"
+    },
+    {
+      "code": "030",
+      "shortName": "BAJIO",
+      "longName": "Banco del Bajío"
+    },
+    {
+      "code": "032",
+      "shortName": "IXE",
+      "longName": "IXE Banco"
+    },
+    {
+      "code": "036",
+      "shortName": "INBURSA",
+      "longName": "Banco Inbursa"
+    },
+    {
+      "code": "037",
+      "shortName": "INTERACCIONES",
+      "longName": "Banco Interacciones"
+    },
+    {
+      "code": "042",
+      "shortName": "MIFEL",
+      "longName": "Banca Mifel"
+    },
+    {
+      "code": "044",
+      "shortName": "SCOTIABANK",
+      "longName": "Scotiabank Inverlat"
+    },
+    {
+      "code": "058",
+      "shortName": "BANREGIO",
+      "longName": "Banco Regional de Monterrey"
+    },
+    {
+      "code": "059",
+      "shortName": "INVEX",
+      "longName": "Banco Invex"
+    },
+    {
+      "code": "060",
+      "shortName": "BANSI",
+      "longName": "Bansi"
+    },
+    {
+      "code": "062",
+      "shortName": "AFIRME",
+      "longName": "Banca Afirme"
+    },
+    {
+      "code": "072",
+      "shortName": "BANORTE",
+      "longName": "Banco Mercantil del Norte"
+    },
+    {
+      "code": "102",
+      "shortName": "ACCENDO BANCO",
+      "longName": "ABN AMRO Bank México"
+    },
+    {
+      "code": "103",
+      "shortName": "AMERICAN EXPRESS",
+      "longName": "American Express Bank (México)"
+    },
+    {
+      "code": "106",
+      "shortName": "BAMSA",
+      "longName": "Bank of America México"
+    },
+    {
+      "code": "108",
+      "shortName": "TOKYO",
+      "longName": "Bank of Tokyo-Mitsubishi UFJ (México)"
+    },
+    {
+      "code": "110",
+      "shortName": "JP MORGAN",
+      "longName": "Banco J.P. Morgan"
+    },
+    {
+      "code": "112",
+      "shortName": "BMONEX",
+      "longName": "Banco Monex"
+    },
+    {
+      "code": "113",
+      "shortName": "VE POR MAS",
+      "longName": "Banco Ve por Mas"
+    },
+    {
+      "code": "116",
+      "shortName": "ING",
+      "longName": "ING Bank (México)"
+    },
+    {
+      "code": "124",
+      "shortName": "CITI MEXICO",
+      "longName": "Banco Citi Mexico (formerly Deutsche Bank México)"
+    },
+    {
+      "code": "126",
+      "shortName": "CREDIT SUISSE",
+      "longName": "Banco Credit Suisse (México)"
+    },
+    {
+      "code": "127",
+      "shortName": "AZTECA",
+      "longName": "Banco Azteca"
+    },
+    {
+      "code": "128",
+      "shortName": "AUTOFIN",
+      "longName": "Banco Autofin México"
+    },
+    {
+      "code": "129",
+      "shortName": "BARCLAYS",
+      "longName": "Barclays Bank México"
+    },
+    {
+      "code": "130",
+      "shortName": "COMPARTAMOS",
+      "longName": "Banco Compartamos"
+    },
+    {
+      "code": "131",
+      "shortName": "FAMSA",
+      "longName": "Banco Ahorro Famsa"
+    },
+    {
+      "code": "132",
+      "shortName": "BMULTIVA",
+      "longName": "Banco Multiva"
+    },
+    {
+      "code": "133",
+      "shortName": "ACTINVER",
+      "longName": "Banco Actinver"
+    },
+    {
+      "code": "134",
+      "shortName": "WAL-MART",
+      "longName": "Banco Wal-Mart de México Adelante"
+    },
+    {
+      "code": "135",
+      "shortName": "NAFIN",
+      "longName": "Nacional Financiera"
+    },
+    {
+      "code": "136",
+      "shortName": "INTERBANCO",
+      "longName": "Inter Banco"
+    },
+    {
+      "code": "137",
+      "shortName": "BANCOPPEL",
+      "longName": "BanCoppel"
+    },
+    {
+      "code": "138",
+      "shortName": "ABC CAPITAL",
+      "longName": "ABC Capital"
+    },
+    {
+      "code": "139",
+      "shortName": "UBS BANK",
+      "longName": "UBS Banco"
+    },
+    {
+      "code": "140",
+      "shortName": "CONSUBANCO",
+      "longName": "Banco Fácil"
+    },
+    {
+      "code": "141",
+      "shortName": "VOLKSWAGEN",
+      "longName": "Volkswagen Bank, Institución de Banca Múltiple"
+    },
+    {
+      "code": "143",
+      "shortName": "CIBANCO",
+      "longName": "Consultoría Internacional Banco"
+    },
+    {
+      "code": "145",
+      "shortName": "BBASE",
+      "longName": "Banco BASE"
+    },
+    {
+      "code": "147",
+      "shortName": "BANKAOOL",
+      "longName": "Bankaool, Institución de Banca Múltiple"
+    },
+    {
+      "code": "148",
+      "shortName": "PAGATODO",
+      "longName": "Banco PagaTodo Institución de Banca Múltiple"
+    },
+    {
+      "code": "150",
+      "shortName": "INMOBILIARIO",
+      "longName": "Banco Inmobiliario Mexicano, Institución de Banca Múltiple"
+    },
+    {
+      "code": "151",
+      "shortName": "DONDE",
+      "longName": "Fundación Dondé Banco"
+    },
+    {
+      "code": "152",
+      "shortName": "BANCREA",
+      "longName": "Banco Bancrea, Institución de Banca Múltiple"
+    },
+    {
+      "code": "154",
+      "shortName": "BANCO FINTERRA",
+      "longName": "Banco Finterra"
+    },
+    {
+      "code": "155",
+      "shortName": "ICBC",
+      "longName": "Industrial and Commercial Bank of China"
+    },
+    {
+      "code": "156",
+      "shortName": "SABADELL",
+      "longName": "Banco de Sabadell"
+    },
+    {
+      "code": "157",
+      "shortName": "SHINHAN",
+      "longName": "Shinhan Bank"
+    },
+    {
+      "code": "158",
+      "shortName": "MIZUHO BANK",
+      "longName": "Mizuho Bank"
+    },
+    {
+      "code": "159",
+      "shortName": "BANK OF CHINA",
+      "longName": "Bank of China México"
+    },
+    {
+      "code": "160",
+      "shortName": "BANCO S3",
+      "longName": "Banco S3 México"
+    },
+    {
+      "code": "166",
+      "shortName": "BANSEFI",
+      "longName": "Banco del Ahorro Nacional y Servicios Financieros"
+    },
+    {
+      "code": "167",
+      "shortName": "HEY",
+      "longName": "Hey Banco"
+    },
+    {
+      "code": "168",
+      "shortName": "HIPOTECARIA FED",
+      "longName": "Sociedad Hipotecaria Federal"
+    },
+    {
+      "code": "600",
+      "shortName": "MONEXCB",
+      "longName": "Monex Casa de Bolsa"
+    },
+    {
+      "code": "601",
+      "shortName": "GBM",
+      "longName": "GBM Grupo Bursátil Mexicano"
+    },
+    {
+      "code": "602",
+      "shortName": "MASARI",
+      "longName": "Masari Casa de Bolsa"
+    },
+    {
+      "code": "604",
+      "shortName": "C.B. INBURSA",
+      "longName": "Inversora Bursátil"
+    },
+    {
+      "code": "605",
+      "shortName": "VALUE",
+      "longName": "Valué, Casa de Bolsa"
+    },
+    {
+      "code": "606",
+      "shortName": "ESTRUCTURADORES",
+      "longName": "Base Internacional Casa de Bolsa"
+    },
+    {
+      "code": "607",
+      "shortName": "TIBER",
+      "longName": "Casa de Cambio Tiber"
+    },
+    {
+      "code": "608",
+      "shortName": "VECTOR",
+      "longName": "Vector Casa de Bolsa"
+    },
+    {
+      "code": "610",
+      "shortName": "B&B",
+      "longName": "B y B Casa de Cambio"
+    },
+    {
+      "code": "611",
+      "shortName": "INTERCAM",
+      "longName": "Intercam Casa de Cambio"
+    },
+    {
+      "code": "613",
+      "shortName": "MULTIVA",
+      "longName": "Multivalores Casa de Bolsa, Multiva Gpo. Fin."
+    },
+    {
+      "code": "614",
+      "shortName": "ACCIVAL",
+      "longName": "Acciones y Valores Banamex, Casa de Bolsa"
+    },
+    {
+      "code": "615",
+      "shortName": "MERRILL LYNCH",
+      "longName": "Merrill Lynch México, Casa de Bolsa"
+    },
+    {
+      "code": "616",
+      "shortName": "FINAMEX",
+      "longName": "Casa de Bolsa Finamex"
+    },
+    {
+      "code": "617",
+      "shortName": "VALMEX",
+      "longName": "Valores Mexicanos Casa de Bolsa"
+    },
+    {
+      "code": "618",
+      "shortName": "ÚNICA",
+      "longName": "Única Casa de Cambio"
+    },
+    {
+      "code": "619",
+      "shortName": "ASEGURADORA MAPFRE",
+      "longName": "MAPFRE Tepeyac"
+    },
+    {
+      "code": "620",
+      "shortName": "PROFUTURO",
+      "longName": "Profuturo G.N.P., Afore"
+    },
+    {
+      "code": "621",
+      "shortName": "CB ACTINBER",
+      "longName": "Actinver Casa de Bolsa"
+    },
+    {
+      "code": "622",
+      "shortName": "ACTINVE SI",
+      "longName": "Actinver"
+    },
+    {
+      "code": "623",
+      "shortName": "SKANDIA",
+      "longName": "Skandia Vida"
+    },
+    {
+      "code": "624",
+      "shortName": "CONSULTORÍA",
+      "longName": "Consultoría Internacional Casa de Cambio"
+    },
+    {
+      "code": "626",
+      "shortName": "CBDEUTSCHE",
+      "longName": "Deutsche Securities"
+    },
+    {
+      "code": "627",
+      "shortName": "ZURICH",
+      "longName": "Zurich Compañía de Seguros"
+    },
+    {
+      "code": "628",
+      "shortName": "ZURICHVI",
+      "longName": "Zurich Vida, Compañía de Seguros"
+    },
+    {
+      "code": "629",
+      "shortName": "HIPOTECARIA SU CASITA",
+      "longName": "Hipotecaria su Casita"
+    },
+    {
+      "code": "630",
+      "shortName": "CB INTERCAM",
+      "longName": "Intercam Casa de Bolsa"
+    },
+    {
+      "code": "631",
+      "shortName": "CI BOLSA",
+      "longName": "CI Casa de Bolsa"
+    },
+    {
+      "code": "632",
+      "shortName": "BULLTICK C.B.",
+      "longName": "Bulltick Casa de Bolsa"
+    },
+    {
+      "code": "633",
+      "shortName": "STERLING",
+      "longName": "Sterling Casa de Cambio"
+    },
+    {
+      "code": "634",
+      "shortName": "FINCOMUN",
+      "longName": "Fincomún, Servicios Financieros Comunitarios"
+    },
+    {
+      "code": "636",
+      "shortName": "HDI SEGUROS",
+      "longName": "HDI Seguros"
+    },
+    {
+      "code": "637",
+      "shortName": "ORDER",
+      "longName": "OrderExpress Casa de Cambio"
+    },
+    {
+      "code": "638",
+      "shortName": "NU MEXICO",
+      "longName": "Nu México Financiera (Nubank)"
+    },
+    {
+      "code": "640",
+      "shortName": "CB JPMORGAN",
+      "longName": "J.P. Morgan Casa de Bolsa"
+    },
+    {
+      "code": "642",
+      "shortName": "REFORMA",
+      "longName": "Operadora de Recursos Reforma"
+    },
+    {
+      "code": "646",
+      "shortName": "STP",
+      "longName": "Sistema de Transferencias y Pagos STP, SOFOM E.N.R."
+    },
+    {
+      "code": "647",
+      "shortName": "TELECOMM",
+      "longName": "Telecomunicaciones de México"
+    },
+    {
+      "code": "648",
+      "shortName": "EVERCORE",
+      "longName": "Evercore Casa de Bolsa"
+    },
+    {
+      "code": "649",
+      "shortName": "SKANDIA",
+      "longName": "Skandia Operadora"
+    },
+    {
+      "code": "651",
+      "shortName": "SEGMTY",
+      "longName": "Seguros Monterrey New York Life"
+    },
+    {
+      "code": "652",
+      "shortName": "CREDICAPITAL",
+      "longName": "Solución Asea, Sociedad Financiera Popular"
+    },
+    {
+      "code": "653",
+      "shortName": "KUSPIT",
+      "longName": "Kuspit Casa de Bolsa"
+    },
+    {
+      "code": "655",
+      "shortName": "SOFIEXPRESS",
+      "longName": "JP SofiExpress"
+    },
+    {
+      "code": "656",
+      "shortName": "UNAGRA",
+      "longName": "UNAGRA, S.F.P."
+    },
+    {
+      "code": "659",
+      "shortName": "ASP INTEGRA OPC",
+      "longName": "Opciones Empresariales Del Noreste"
+    },
+    {
+      "code": "661",
+      "shortName": "ALTERNATIVOS",
+      "longName": "Servicios Financieros Alternativos (Klar)"
+    },
+    {
+      "code": "670",
+      "shortName": "LIBERTAD",
+      "longName": "Libertad Servicios Financieros"
+    },
+    {
+      "code": "674",
+      "shortName": "AXA",
+      "longName": "AXA Seguros"
+    },
+    {
+      "code": "677",
+      "shortName": "CAJA POP MEXICA",
+      "longName": "Caja Popular Mexicana"
+    },
+    {
+      "code": "679",
+      "shortName": "FND",
+      "longName": "Financiera Nacional De Desarrollo Agropecuario"
+    },
+    {
+      "code": "680",
+      "shortName": "CRISTOBAL COLON",
+      "longName": "Caja Popular Cristóbal Colón"
+    },
+    {
+      "code": "683",
+      "shortName": "CAJA TELEFONIST",
+      "longName": "Caja de Ahorro de los Telefonistas"
+    },
+    {
+      "code": "684",
+      "shortName": "TRANSFER",
+      "longName": "Operadora de Pagos Moviles de Mexico"
+    },
+    {
+      "code": "685",
+      "shortName": "FONDO (FIRA)",
+      "longName": "Fondo de Garantía y Fomento para la Agricultura, Ganadería y Avicultura (FONDO)"
+    },
+    {
+      "code": "686",
+      "shortName": "INVERCAP",
+      "longName": "Afore InverCap"
+    },
+    {
+      "code": "688",
+      "shortName": "CREDICLUB",
+      "longName": "Crediclub"
+    },
+    {
+      "code": "689",
+      "shortName": "FOMPED",
+      "longName": "Fondo Mexicano del Petroleo para la Estabilizacion y el Desarrollo"
+    },
+    {
+      "code": "699",
+      "shortName": "FONDEADORA",
+      "longName": "Fondea Technologies"
+    },
+    {
+      "code": "703",
+      "shortName": "TESORED",
+      "longName": "Tesored"
+    },
+    {
+      "code": "706",
+      "shortName": "ARCUS",
+      "longName": "Arcus Financial Intelligence"
+    },
+    {
+      "code": "710",
+      "shortName": "NVIO",
+      "longName": "NVIO Pagos México"
+    },
+    {
+      "code": "721",
+      "shortName": "ALBO",
+      "longName": "albo"
+    },
+    {
+      "code": "722",
+      "shortName": "MERCADO PAGO W",
+      "longName": "Mercado Pago W"
+    },
+    {
+      "code": "723",
+      "shortName": "CUENCA",
+      "longName": "Cuenca"
+    },
+    {
+      "code": "728",
+      "shortName": "SPIN",
+      "longName": "SPIN by OXXO"
+    },
+    {
+      "code": "732",
+      "shortName": "PEIBO",
+      "longName": "Peibo Fintech"
+    },
+    {
+      "code": "734",
+      "shortName": "FINCH",
+      "longName": "Finco Pay (Finch)"
+    },
+    {
+      "code": "812",
+      "shortName": "BBVA BANCOMER2",
+      "longName": "BBVA Bancomer"
+    },
+    {
+      "code": "814",
+      "shortName": "SANTANDER2",
+      "longName": "Banco Santander"
+    },
+    {
+      "code": "821",
+      "shortName": "HSBC2",
+      "longName": "HSBC México"
+    },
+    {
+      "code": "846",
+      "shortName": "STP",
+      "longName": "Sistema de Transferencias y Pagos STP"
+    },
+    {
+      "code": "901",
+      "shortName": "CLS",
+      "longName": "CLS Bank International"
+    },
+    {
+      "code": "902",
+      "shortName": "INDEVAL",
+      "longName": "SD. INDEVAL"
+    },
+    {
+      "code": "903",
+      "shortName": "CODI VALIDA",
+      "longName": "CoDi Valida"
+    }
+  ]
+}
