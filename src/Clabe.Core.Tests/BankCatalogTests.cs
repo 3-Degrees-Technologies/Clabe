@@ -179,6 +179,156 @@ public class BankCatalogTests
             Is.Null);
     }
 
+    [Test]
+    public void ResolveSwiftBic_ShouldNotGuessWhenSeveralEntriesShareTheHintedCity()
+    {
+        // Real directories list several departmental codes in the same city
+        // (e.g. four Banorte codes all in Monterrey). A city hint that matches
+        // more than one entry identifies nothing — the resolver must fall back
+        // to the unambiguous default, never pick one arbitrarily.
+        var catalog = new BankCatalog(
+            new[]
+            {
+                Institution("997",
+                    Entry("TESTMXMM"),
+                    Entry("TESTMXMMDER", "Monterrey"),
+                    Entry("TESTMXMMFEX", "Monterrey")),
+                Institution("996",
+                    Entry("NOHQMXMMDER", "Monterrey"),
+                    Entry("NOHQMXMMFEX", "Monterrey"))
+            },
+            new BankCatalogSnapshot
+            {
+                AuthoritativeSource = "https://www.banxico.org.mx/cep-scl/listaInstituciones.do",
+                SeededFrom = "unit-test",
+                RetrievedOn = "2026-08-05"
+            });
+        var service = new ClabeValidationService(catalog);
+
+        // Ambiguous city match, head office present: fall back to it.
+        Assert.That(
+            service.ResolveSwiftBic("997180012345678901", new SwiftBicResolutionHints { City = "Monterrey" }),
+            Is.EqualTo("TESTMXMM"));
+
+        // Ambiguous city match, no head office: nothing identifiable.
+        Assert.That(
+            service.ResolveSwiftBic("996180012345678902", new SwiftBicResolutionHints { City = "Monterrey" }),
+            Is.Null);
+    }
+
+    [Test]
+    public void ResolveSwiftBic_ShouldMatchCityHintsAccentInsensitively()
+    {
+        // Mexican city names arrive both accented and unaccented ("León"/"Leon",
+        // "Ciudad de México"/"Ciudad de Mexico") — the match must not care.
+        var catalog = new BankCatalog(
+            new[] { Institution("995", Entry("TESTMXMM"), Entry("TESTMXMMLEO", "León")) },
+            new BankCatalogSnapshot
+            {
+                AuthoritativeSource = "https://www.banxico.org.mx/cep-scl/listaInstituciones.do",
+                SeededFrom = "unit-test",
+                RetrievedOn = "2026-08-05"
+            });
+        var service = new ClabeValidationService(catalog);
+
+        Assert.That(
+            service.ResolveSwiftBic("995180012345678903", new SwiftBicResolutionHints { City = "Leon" }),
+            Is.EqualTo("TESTMXMMLEO"));
+        Assert.That(
+            service.ResolveSwiftBic("995180012345678903", new SwiftBicResolutionHints { City = "LEÓN" }),
+            Is.EqualTo("TESTMXMMLEO"));
+    }
+
+    [Test]
+    public void EmbeddedDefault_ShouldResolveBranchQualifiedBicsByCity()
+    {
+        var service = new ClabeValidationService();
+
+        // Banamex (002) carries geographic branch entries; a city hint picks them,
+        // accent-insensitively, while the head office remains the default.
+        Assert.That(
+            service.ResolveSwiftBic("002010077777777771", new SwiftBicResolutionHints { City = "Monterrey" }),
+            Is.EqualTo("BNMXMXMMMTY"));
+        Assert.That(
+            service.ResolveSwiftBic("002010077777777771", new SwiftBicResolutionHints { City = "León" }),
+            Is.EqualTo("BNMXMXMMLEO"));
+        Assert.That(service.ResolveSwiftBic("002010077777777771"), Is.EqualTo("BNMXMXMM"));
+
+        // BBVA (012): Guadalajara branch entry; unmatched cities fall back.
+        Assert.That(
+            service.ResolveSwiftBic("012320029937286769", new SwiftBicResolutionHints { City = "Guadalajara" }),
+            Is.EqualTo("BCMRMXMMGUA"));
+        Assert.That(
+            service.ResolveSwiftBic("012320029937286769", new SwiftBicResolutionHints { City = "Zapopan" }),
+            Is.EqualTo("BCMRMXMM"));
+
+        // Scotiabank (044): geographic branch entries confirmed by directory dump + xe.com.
+        Assert.That(
+            service.ResolveSwiftBic("044180012345678906", new SwiftBicResolutionHints { City = "Puebla" }),
+            Is.EqualTo("MBCOMXMMPUE"));
+    }
+
+    [Test]
+    public void EmbeddedDefault_ShouldCoverTheVerifiedBankSet()
+    {
+        var catalog = BankCatalog.EmbeddedDefault;
+
+        // Batches verified 2026-08 against two independent SWIFT directories each.
+        var expected = new Dictionary<string, string>
+        {
+            ["001"] = "BDEMMXMM", // Banxico
+            ["006"] = "BNCEMXMM", // Bancomext
+            ["019"] = "EJERMXMM", // Banjercito
+            ["042"] = "MIFEMXMM", // Banca Mifel
+            ["059"] = "INXXMXMM", // Invex
+            ["060"] = "SNABMXM1", // Bansí
+            ["062"] = "AFIRMXMT", // Afirme
+            ["106"] = "BOFAMXMX", // Bank of America México
+            ["108"] = "BOTKMXMX", // MUFG México
+            ["110"] = "CHASMXMX", // JP Morgan México
+            ["112"] = "MONXMXMM", // Banco Monex
+            ["124"] = "CITIMXMM", // Citi México
+            ["126"] = "CSFBMXMM", // Credit Suisse México
+            ["128"] = "AUMCMXMM", // Autofin
+            ["129"] = "BARCMXMM", // Barclays México
+            ["132"] = "MIMMMXMX", // Multiva
+            ["133"] = "ACIOMXMM", // Actinver
+            ["135"] = "NFSAMXMM", // Nafin
+            ["136"] = "INTEMXMM", // Intercam Banco
+            ["137"] = "BNNMMXMM", // BanCoppel
+            ["139"] = "UBSWMXMM", // UBS México
+            ["143"] = "CIMXMXMM", // CIBanco
+            ["145"] = "BBSEMXMX", // Banco Base
+            ["147"] = "BKOLMXMM", // Bankaool
+            ["152"] = "BIBPMXMM", // Bancrea
+            ["155"] = "ICBKMXMM", // ICBC México
+            ["156"] = "BSABMXMM", // Sabadell México
+            ["157"] = "SHBKMXMM", // Shinhan México
+            ["158"] = "MHBMMXMM", // Mizuho México
+            ["159"] = "BKCHMXMX", // Bank of China México
+            ["160"] = "BSMXMXMM"  // Banco S3 (CACEIS)
+        };
+
+        foreach (var (code, bic) in expected)
+        {
+            Assert.That(TryResolve(catalog, code)?.SwiftBic, Is.EqualTo(bic), $"bank code {code}");
+        }
+
+        // Institutions confirmed to have NO SWIFT membership (or no verifiable
+        // MX BIC) must stay empty: fintechs/SPEI-only (646 STP, 722 Mercado
+        // Pago), defunct banks (131 Famsa), not-connected banks (140
+        // Consubanco, 148 PagaTodo), Hey Banco (167, wires via parent), and
+        // American Express México (103).
+        foreach (var code in new[] { "103", "131", "140", "148", "167", "646" })
+        {
+            var institution = TryResolve(catalog, code);
+            if (institution is not null)
+            {
+                Assert.That(institution.SwiftBics, Is.Empty, $"bank code {code} must have no BIC");
+            }
+        }
+    }
+
     private static BankInstitution Institution(string code, params SwiftBicEntry[] swiftBics) => new()
     {
         Code = new BankCode { Value = code },

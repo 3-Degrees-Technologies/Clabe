@@ -7,7 +7,12 @@
     {
       "code": "001",
       "shortName": "BANXICO",
-      "longName": "Banco de México"
+      "longName": "Banco de México",
+      "swiftBics": [
+        {
+          "bic": "BDEMMXMM"
+        }
+      ]
     },
     {
       "code": "002",
@@ -16,13 +21,34 @@
       "swiftBics": [
         {
           "bic": "BNMXMXMM"
+        },
+        {
+          "bic": "BNMXMXMMMTY",
+          "city": "Monterrey"
+        },
+        {
+          "bic": "BNMXMXMMPUE",
+          "city": "Puebla"
+        },
+        {
+          "bic": "BNMXMXMMGUA",
+          "city": "Guadalajara"
+        },
+        {
+          "bic": "BNMXMXMMLEO",
+          "city": "León"
         }
       ]
     },
     {
       "code": "006",
       "shortName": "BANCOMEXT",
-      "longName": "Banco Nacional de Comercio Exterior"
+      "longName": "Banco Nacional de Comercio Exterior",
+      "swiftBics": [
+        {
+          "bic": "BNCEMXMM"
+        }
+      ]
     },
     {
       "code": "009",
@@ -36,6 +62,14 @@
       "swiftBics": [
         {
           "bic": "BCMRMXMM"
+        },
+        {
+          "bic": "BCMRMXMMGUA",
+          "city": "Guadalajara"
+        },
+        {
+          "bic": "BCMRMXMMMTY",
+          "city": "Monterrey"
         }
       ]
     },
@@ -52,7 +86,12 @@
     {
       "code": "019",
       "shortName": "BANJERCITO",
-      "longName": "Banco Nacional del Ejército, Fuerza Aérea y Armada"
+      "longName": "Banco Nacional del Ejército, Fuerza Aérea y Armada",
+      "swiftBics": [
+        {
+          "bic": "EJERMXMM"
+        }
+      ]
     },
     {
       "code": "021",
@@ -102,7 +141,12 @@
     {
       "code": "042",
       "shortName": "MIFEL",
-      "longName": "Banca Mifel"
+      "longName": "Banca Mifel",
+      "swiftBics": [
+        {
+          "bic": "MIFEMXMM"
+        }
+      ]
     },
     {
       "code": "044",
@@ -111,6 +155,18 @@
       "swiftBics": [
         {
           "bic": "MBCOMXMM"
+        },
+        {
+          "bic": "MBCOMXMMGUA",
+          "city": "Guadalajara"
+        },
+        {
+          "bic": "MBCOMXMMMTY",
+          "city": "Monterrey"
+        },
+        {
+          "bic": "MBCOMXMMPUE",
+          "city": "Puebla"
         }
       ]
     },
@@ -127,17 +183,32 @@
     {
       "code": "059",
       "shortName": "INVEX",
-      "longName": "Banco Invex"
+      "longName": "Banco Invex",
+      "swiftBics": [
+        {
+          "bic": "INXXMXMM"
+        }
+      ]
     },
     {
       "code": "060",
       "shortName": "BANSI",
-      "longName": "Bansi"
+      "longName": "Bansi",
+      "swiftBics": [
+        {
+          "bic": "SNABMXM1"
+        }
+      ]
     },
     {
       "code": "062",
       "shortName": "AFIRME",
-      "longName": "Banca Afirme"
+      "longName": "Banca Afirme",
+      "swiftBics": [
+        {
+          "bic": "AFIRMXMT"
+        }
+      ]
     },
     {
       "code": "072",
@@ -162,22 +233,42 @@
     {
       "code": "106",
       "shortName": "BAMSA",
-      "longName": "Bank of America México"
+      "longName": "Bank of America México",
+      "swiftBics": [
+        {
+          "bic": "BOFAMXMX"
+        }
+      ]
     },
     {
       "code": "108",
       "shortName": "TOKYO",
-      "longName": "Bank of Tokyo-Mitsubishi UFJ (México)"
+      "longName": "Bank of Tokyo-Mitsubishi UFJ (México)",
+      "swiftBics": [
+        {
+          "bic": "BOTKMXMX"
+        }
+      ]
     },
     {
       "code": "110",
       "shortName": "JP MORGAN",
-      "longName": "Banco J.P. Morgan"
+      "longName": "Banco J.P. Morgan",
+      "swiftBics": [
+        {
+          "bic": "CHASMXMX"
+        }
+      ]
     },
     {
       "code": "112",
       "shortName": "BMONEX",
-      "longName": "Banco Monex"
+      "longName": "Banco Monex",
+      "swiftBics": [
+        {
+          "bic": "MONXMXMM"
+        }
+      ]
     },
     {
       "code": "113",
@@ -192,12 +283,22 @@
     {
       "code": "124",
       "shortName": "CITI MEXICO",
-      "longName": "Banco Citi Mexico (formerly Deutsche Bank México)"
+      "longName": "Banco Citi Mexico (formerly Deutsche Bank México)",
+      "swiftBics": [
+        {
+          "bic": "CITIMXMM"
+        }
+      ]
     },
     {
       "code": "126",
       "shortName": "CREDIT SUISSE",
-      "longName": "Banco Credit Suisse (México)"
+      "longName": "Banco Credit Suisse (México)",
+      "swiftBics": [
+        {
+          "bic": "CSFBMXMM"
+        }
+      ]
     },
     {
       "code": "127",
@@ -212,12 +313,22 @@
     {
       "code": "128",
       "shortName": "AUTOFIN",
-      "longName": "Banco Autofin México"
+      "longName": "Banco Autofin México",
+      "swiftBics": [
+        {
+          "bic": "AUMCMXMM"
+        }
+      ]
     },
     {
       "code": "129",
       "shortName": "BARCLAYS",
-      "longName": "Barclays Bank México"
+      "longName": "Barclays Bank México",
+      "swiftBics": [
+        {
+          "bic": "BARCMXMM"
+        }
+      ]
     },
     {
       "code": "130",
@@ -232,12 +343,22 @@
     {
       "code": "132",
       "shortName": "BMULTIVA",
-      "longName": "Banco Multiva"
+      "longName": "Banco Multiva",
+      "swiftBics": [
+        {
+          "bic": "MIMMMXMX"
+        }
+      ]
     },
     {
       "code": "133",
       "shortName": "ACTINVER",
-      "longName": "Banco Actinver"
+      "longName": "Banco Actinver",
+      "swiftBics": [
+        {
+          "bic": "ACIOMXMM"
+        }
+      ]
     },
     {
       "code": "134",
@@ -247,17 +368,32 @@
     {
       "code": "135",
       "shortName": "NAFIN",
-      "longName": "Nacional Financiera"
+      "longName": "Nacional Financiera",
+      "swiftBics": [
+        {
+          "bic": "NFSAMXMM"
+        }
+      ]
     },
     {
       "code": "136",
       "shortName": "INTERBANCO",
-      "longName": "Inter Banco"
+      "longName": "Inter Banco",
+      "swiftBics": [
+        {
+          "bic": "INTEMXMM"
+        }
+      ]
     },
     {
       "code": "137",
       "shortName": "BANCOPPEL",
-      "longName": "BanCoppel"
+      "longName": "BanCoppel",
+      "swiftBics": [
+        {
+          "bic": "BNNMMXMM"
+        }
+      ]
     },
     {
       "code": "138",
@@ -267,7 +403,12 @@
     {
       "code": "139",
       "shortName": "UBS BANK",
-      "longName": "UBS Banco"
+      "longName": "UBS Banco",
+      "swiftBics": [
+        {
+          "bic": "UBSWMXMM"
+        }
+      ]
     },
     {
       "code": "140",
@@ -282,17 +423,32 @@
     {
       "code": "143",
       "shortName": "CIBANCO",
-      "longName": "Consultoría Internacional Banco"
+      "longName": "Consultoría Internacional Banco",
+      "swiftBics": [
+        {
+          "bic": "CIMXMXMM"
+        }
+      ]
     },
     {
       "code": "145",
       "shortName": "BBASE",
-      "longName": "Banco BASE"
+      "longName": "Banco BASE",
+      "swiftBics": [
+        {
+          "bic": "BBSEMXMX"
+        }
+      ]
     },
     {
       "code": "147",
       "shortName": "BANKAOOL",
-      "longName": "Bankaool, Institución de Banca Múltiple"
+      "longName": "Bankaool, Institución de Banca Múltiple",
+      "swiftBics": [
+        {
+          "bic": "BKOLMXMM"
+        }
+      ]
     },
     {
       "code": "148",
@@ -312,7 +468,12 @@
     {
       "code": "152",
       "shortName": "BANCREA",
-      "longName": "Banco Bancrea, Institución de Banca Múltiple"
+      "longName": "Banco Bancrea, Institución de Banca Múltiple",
+      "swiftBics": [
+        {
+          "bic": "BIBPMXMM"
+        }
+      ]
     },
     {
       "code": "154",
@@ -322,32 +483,62 @@
     {
       "code": "155",
       "shortName": "ICBC",
-      "longName": "Industrial and Commercial Bank of China"
+      "longName": "Industrial and Commercial Bank of China",
+      "swiftBics": [
+        {
+          "bic": "ICBKMXMM"
+        }
+      ]
     },
     {
       "code": "156",
       "shortName": "SABADELL",
-      "longName": "Banco de Sabadell"
+      "longName": "Banco de Sabadell",
+      "swiftBics": [
+        {
+          "bic": "BSABMXMM"
+        }
+      ]
     },
     {
       "code": "157",
       "shortName": "SHINHAN",
-      "longName": "Shinhan Bank"
+      "longName": "Shinhan Bank",
+      "swiftBics": [
+        {
+          "bic": "SHBKMXMM"
+        }
+      ]
     },
     {
       "code": "158",
       "shortName": "MIZUHO BANK",
-      "longName": "Mizuho Bank"
+      "longName": "Mizuho Bank",
+      "swiftBics": [
+        {
+          "bic": "MHBMMXMM"
+        }
+      ]
     },
     {
       "code": "159",
       "shortName": "BANK OF CHINA",
-      "longName": "Bank of China México"
+      "longName": "Bank of China México",
+      "swiftBics": [
+        {
+          "bic": "BKCHMXMX"
+        }
+      ]
     },
     {
       "code": "160",
       "shortName": "BANCO S3",
-      "longName": "Banco S3 México"
+      "longName": "Banco S3 México",
+      "swiftBics": [
+        {
+          "bic": "BSMXMXMM"
+        }
+      ]
     },
     {
       "code": "166",
