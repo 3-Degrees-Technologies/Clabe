@@ -65,6 +65,65 @@ public class BankCatalogTests
         Assert.That(new ClabeValidationService().IdentifyBank("999"), Is.Null);
     }
 
+    [Test]
+    public void EmbeddedDefault_ShouldResolveSwiftBicForMajorBanks()
+    {
+        var catalog = BankCatalog.EmbeddedDefault;
+
+        // Externally verified head-office BICs (bank.codes / theswiftcodes.com,
+        // 2026-08). Exact values matter: a wrong BIC misroutes a SWIFT payment.
+        var expected = new Dictionary<string, string>
+        {
+            ["002"] = "BNMXMXMM", // Banamex
+            ["012"] = "BCMRMXMM", // BBVA México (Bancomer)
+            ["014"] = "BMSXMXMM", // Santander México
+            ["021"] = "BIMEMXMM", // HSBC México
+            ["030"] = "BJIOMXML", // Banco del Bajío
+            ["036"] = "INBUMXMM", // Inbursa
+            ["044"] = "MBCOMXMM", // Scotiabank México
+            ["058"] = "RGIOMXMT", // Banregio
+            ["072"] = "MENOMXMT", // Banorte
+            ["127"] = "AZTKMXMM"  // Banco Azteca
+        };
+
+        foreach (var (code, bic) in expected)
+        {
+            Assert.That(TryResolve(catalog, code)?.SwiftBic, Is.EqualTo(bic), $"bank code {code}");
+        }
+
+        // SPEI-only participants (fintechs, transfer institutions) have no SWIFT
+        // BIC — the catalog must say so rather than guess. 646 = STP.
+        Assert.That(TryResolve(catalog, "646")?.SwiftBic, Is.Null);
+    }
+
+    [Test]
+    public void EmbeddedDefault_SwiftBicsShouldBeWellFormedWhenPresent()
+    {
+        // ISO 9362: 8 or 11 alphanumeric characters, uppercase. Guards the
+        // hand-curated data file against typos slipping into a release.
+        var malformed = BankCatalog.EmbeddedDefault.Institutions
+            .Where(i => i.SwiftBic is not null)
+            .Where(i => i.SwiftBic!.Length is not (8 or 11)
+                || !i.SwiftBic.All(c => char.IsAsciiLetterUpper(c) || char.IsAsciiDigit(c)))
+            .Select(i => $"{i.Code.Value}={i.SwiftBic}")
+            .ToArray();
+
+        Assert.That(malformed, Is.Empty);
+    }
+
+    [Test]
+    public void IdentifyBank_ShouldCarrySwiftBicFromFullClabe()
+    {
+        var service = new ClabeValidationService();
+
+        // Full 18-digit CLABEs resolve through to the institution's BIC.
+        Assert.That(service.IdentifyBank("012320029937286769")?.SwiftBic, Is.EqualTo("BCMRMXMM"));
+        Assert.That(service.IdentifyBank("002010077777777771")?.SwiftBic, Is.EqualTo("BNMXMXMM"));
+
+        // Unknown bank code resolves to no institution at all.
+        Assert.That(service.IdentifyBank("500000000000000000"), Is.Null);
+    }
+
     private static BankInstitution? TryResolve(IBankCatalog catalog, string code) =>
         catalog.TryResolve(new BankCode { Value = code }, out var institution) ? institution : null;
 }

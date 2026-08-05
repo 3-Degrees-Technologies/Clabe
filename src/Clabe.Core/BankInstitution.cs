@@ -21,4 +21,12 @@ public sealed record BankInstitution
     /// Gets the long, official institution name (e.g. "BBVA Bancomer").
     /// </summary>
     public required string LongName { get; init; }
+
+    /// <summary>
+    /// Gets the institution's head-office SWIFT/BIC code (ISO 9362, 8 or 11
+    /// characters, e.g. "BCMRMXMM"), or null when the institution has none.
+    /// SPEI-only participants (fintechs, transfer institutions such as STP) are
+    /// not SWIFT members, so a null here is meaningful — callers must not guess.
+    /// </summary>
+    public string? SwiftBic { get; init; }
 }

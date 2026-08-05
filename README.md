@@ -27,6 +27,7 @@ project last touched ~6 years ago with hardcoded, now-stale bank data, and
 - ✅ **Structural validation** — length, digits, and control digit
 - ✅ **Parsing** — bank code, plaza code, account number, control digit
 - ✅ **Bank-name resolution** — display the institution like a SWIFT/BIC lookup
+- ✅ **SWIFT/BIC resolution** — curated head-office BICs for major banks (`BankInstitution.SwiftBic`)
 - ✅ **Refreshable catalog** — swap in fresh Banxico data via `IBankCatalog`
 - ✅ **Structured errors** — `ClabeValidationError` codes, not bare booleans
 - ✅ **Flexible input** — accepts spaces and hyphens
@@ -54,6 +55,11 @@ else
 
 // Resolve the bank for display (SWIFT-style), from a full or partial CLABE
 BankInstitution? bank = service.IdentifyBank("072320098765432109"); // BANORTE
+
+// The institution carries its head-office SWIFT/BIC when it has one.
+// SPEI-only participants (fintechs, STP, …) have none — SwiftBic is null,
+// which is meaningful: do not guess a BIC for them.
+string? bic = bank?.SwiftBic; // "MENOMXMT"
 
 // Parse into components
 if (service.TryParse("012180012345678909", out var parsed))
@@ -94,6 +100,10 @@ dotnet fsi tools/update-bank-catalog.fsx             # write the snapshot
 Refreshing may update bank names to Banxico's current forms (e.g.
 "BBVA BANCOMER" → "BBVA MEXICO"); tests assert names against a fixed catalog, not
 the shipped snapshot, so a refresh won't break the build.
+
+`swiftBic` values are curated by hand (Banxico's list carries no BIC data) and are
+preserved as-is by the refresh script. When adding one, verify it against an
+authoritative SWIFT directory first — a wrong BIC misroutes payments.
 
 ## Dependency Injection
 

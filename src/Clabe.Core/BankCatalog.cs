@@ -85,7 +85,8 @@ public sealed class BankCatalog : IBankCatalog
             {
                 Code = new BankCode { Value = i.Code },
                 ShortName = i.ShortName,
-                LongName = i.LongName
+                LongName = i.LongName,
+                SwiftBic = string.IsNullOrWhiteSpace(i.SwiftBic) ? null : i.SwiftBic.Trim()
             })
             .ToArray();
 
@@ -147,6 +148,9 @@ internal sealed record BankCatalogEntry
 
     [JsonPropertyName("longName")]
     public string LongName { get; init; } = string.Empty;
+
+    [JsonPropertyName("swiftBic")]
+    public string? SwiftBic { get; init; }
 }
 
 /// <summary>

@@ -12,7 +12,8 @@
     {
       "code": "002",
       "shortName": "BANAMEX",
-      "longName": "Banco Nacional de México"
+      "longName": "Banco Nacional de México",
+      "swiftBic": "BNMXMXMM"
     },
     {
       "code": "006",
@@ -27,12 +28,14 @@
     {
       "code": "012",
       "shortName": "BBVA BANCOMER",
-      "longName": "BBVA Bancomer"
+      "longName": "BBVA Bancomer",
+      "swiftBic": "BCMRMXMM"
     },
     {
       "code": "014",
       "shortName": "SANTANDER",
-      "longName": "Banco Santander"
+      "longName": "Banco Santander",
+      "swiftBic": "BMSXMXMM"
     },
     {
       "code": "019",
@@ -42,7 +45,8 @@
     {
       "code": "021",
       "shortName": "HSBC",
-      "longName": "HSBC México"
+      "longName": "HSBC México",
+      "swiftBic": "BIMEMXMM"
     },
     {
       "code": "022",
@@ -52,7 +56,8 @@
     {
       "code": "030",
       "shortName": "BAJIO",
-      "longName": "Banco del Bajío"
+      "longName": "Banco del Bajío",
+      "swiftBic": "BJIOMXML"
     },
     {
       "code": "032",
@@ -62,7 +67,8 @@
     {
       "code": "036",
       "shortName": "INBURSA",
-      "longName": "Banco Inbursa"
+      "longName": "Banco Inbursa",
+      "swiftBic": "INBUMXMM"
     },
     {
       "code": "037",
@@ -77,12 +83,14 @@
     {
       "code": "044",
       "shortName": "SCOTIABANK",
-      "longName": "Scotiabank Inverlat"
+      "longName": "Scotiabank Inverlat",
+      "swiftBic": "MBCOMXMM"
     },
     {
       "code": "058",
       "shortName": "BANREGIO",
-      "longName": "Banco Regional de Monterrey"
+      "longName": "Banco Regional de Monterrey",
+      "swiftBic": "RGIOMXMT"
     },
     {
       "code": "059",
@@ -102,7 +110,8 @@
     {
       "code": "072",
       "shortName": "BANORTE",
-      "longName": "Banco Mercantil del Norte"
+      "longName": "Banco Mercantil del Norte",
+      "swiftBic": "MENOMXMT"
     },
     {
       "code": "102",
@@ -157,7 +166,8 @@
     {
       "code": "127",
       "shortName": "AZTECA",
-      "longName": "Banco Azteca"
+      "longName": "Banco Azteca",
+      "swiftBic": "AZTKMXMM"
     },
     {
       "code": "128",
