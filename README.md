@@ -118,6 +118,24 @@ optional `"city"` for branch-qualified codes; the entry without a city is the
 head office. When adding one, verify it against an authoritative SWIFT directory
 first — a wrong BIC misroutes payments.
 
+### SWIFT/BIC data is best-effort, not absolute truth
+
+BICs change in the real world: banks merge (Interacciones → Banorte), split
+(Banamex separating from Citi), rename (Bansefi → Banco del Bienestar), and
+deactivate codes — and public directories lag those events by months or years.
+The bundled entries were verified against at least two independent SWIFT
+directories at curation time (see git history for dates and sources), and the
+major banks additionally against SWIFT's published SCORE participant list, but
+none of that makes them a live registry:
+
+- Treat a resolved BIC as a **strong default**, not a guarantee. For flows where
+  a misroute is costly, confirm against a SWIFTRef subscription or the
+  beneficiary's bank.
+- An empty `swiftBics` means "no BIC verified", which usually — but not
+  provably — means the institution has no SWIFT membership.
+- Corrections welcome: update the data file with two independent sources cited
+  in the commit message.
+
 ## Dependency Injection
 
 ```csharp

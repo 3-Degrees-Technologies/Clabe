@@ -1,5 +1,5 @@
 {
-  "$comment": "Snapshot of Mexican SPEI participant bank codes used to resolve CLABE bank names. The authoritative, continuously-updated source is Banxico; refresh this file from there rather than editing code.",
+  "$comment": "Snapshot of Mexican SPEI participant bank codes used to resolve CLABE bank names. Regenerate with tools/update-bank-catalog.fsx. swiftBics entries are BEST-EFFORT curated data (verified 2026-08 against two independent SWIFT directories each; majors also against SWIFT's SCORE participant list) — BICs change with bank mergers, splits, and renames, so treat a resolved BIC as a strong default, not absolute truth. An empty/absent swiftBics means no BIC could be verified, which usually means the participant has no SWIFT membership.",
   "authoritativeSource": "https://www.banxico.org.mx/cep-scl/listaInstituciones.do",
   "seededFrom": "https://github.com/center-key/clabe-validator (src/clabe.ts banksMap)",
   "retrievedOn": "2026-07-01",

@@ -28,6 +28,9 @@ public sealed record BankInstitution
     /// institutions such as STP) are not SWIFT members, so an empty list is
     /// meaningful — callers must not guess. An entry with a null
     /// <see cref="SwiftBicEntry.City"/> is the head office.
+    /// This is best-effort curated data, not a live registry: BICs change with
+    /// bank mergers, splits, and renames. Treat a resolved BIC as a strong
+    /// default and verify independently where a misroute is costly.
     /// </summary>
     public IReadOnlyList<SwiftBicEntry> SwiftBics { get; init; } = Array.Empty<SwiftBicEntry>();
 
