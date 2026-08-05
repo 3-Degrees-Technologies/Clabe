@@ -128,6 +128,29 @@ public class ClabeValidationService : IClabeValidationService
             : null;
     }
 
+    /// <inheritdoc />
+    public string? ResolveSwiftBic(string? clabe, SwiftBicResolutionHints? hints = null)
+    {
+        var institution = IdentifyBank(clabe);
+        if (institution is null)
+        {
+            return null;
+        }
+
+        if (hints?.City is { } city && !string.IsNullOrWhiteSpace(city))
+        {
+            var branchMatch = institution.SwiftBics.FirstOrDefault(e =>
+                e.City is not null &&
+                string.Equals(e.City.Trim(), city.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (branchMatch is not null)
+            {
+                return branchMatch.Bic;
+            }
+        }
+
+        return institution.SwiftBic;
+    }
+
     /// <summary>
     /// Validates the raw input string, distinguishing null, empty, and whitespace-only inputs.
     /// </summary>

@@ -13,7 +13,11 @@
       "code": "002",
       "shortName": "BANAMEX",
       "longName": "Banco Nacional de México",
-      "swiftBic": "BNMXMXMM"
+      "swiftBics": [
+        {
+          "bic": "BNMXMXMM"
+        }
+      ]
     },
     {
       "code": "006",
@@ -29,13 +33,21 @@
       "code": "012",
       "shortName": "BBVA BANCOMER",
       "longName": "BBVA Bancomer",
-      "swiftBic": "BCMRMXMM"
+      "swiftBics": [
+        {
+          "bic": "BCMRMXMM"
+        }
+      ]
     },
     {
       "code": "014",
       "shortName": "SANTANDER",
       "longName": "Banco Santander",
-      "swiftBic": "BMSXMXMM"
+      "swiftBics": [
+        {
+          "bic": "BMSXMXMM"
+        }
+      ]
     },
     {
       "code": "019",
@@ -46,7 +58,11 @@
       "code": "021",
       "shortName": "HSBC",
       "longName": "HSBC México",
-      "swiftBic": "BIMEMXMM"
+      "swiftBics": [
+        {
+          "bic": "BIMEMXMM"
+        }
+      ]
     },
     {
       "code": "022",
@@ -57,7 +73,11 @@
       "code": "030",
       "shortName": "BAJIO",
       "longName": "Banco del Bajío",
-      "swiftBic": "BJIOMXML"
+      "swiftBics": [
+        {
+          "bic": "BJIOMXML"
+        }
+      ]
     },
     {
       "code": "032",
@@ -68,7 +88,11 @@
       "code": "036",
       "shortName": "INBURSA",
       "longName": "Banco Inbursa",
-      "swiftBic": "INBUMXMM"
+      "swiftBics": [
+        {
+          "bic": "INBUMXMM"
+        }
+      ]
     },
     {
       "code": "037",
@@ -84,13 +108,21 @@
       "code": "044",
       "shortName": "SCOTIABANK",
       "longName": "Scotiabank Inverlat",
-      "swiftBic": "MBCOMXMM"
+      "swiftBics": [
+        {
+          "bic": "MBCOMXMM"
+        }
+      ]
     },
     {
       "code": "058",
       "shortName": "BANREGIO",
       "longName": "Banco Regional de Monterrey",
-      "swiftBic": "RGIOMXMT"
+      "swiftBics": [
+        {
+          "bic": "RGIOMXMT"
+        }
+      ]
     },
     {
       "code": "059",
@@ -111,7 +143,11 @@
       "code": "072",
       "shortName": "BANORTE",
       "longName": "Banco Mercantil del Norte",
-      "swiftBic": "MENOMXMT"
+      "swiftBics": [
+        {
+          "bic": "MENOMXMT"
+        }
+      ]
     },
     {
       "code": "102",
@@ -167,7 +203,11 @@
       "code": "127",
       "shortName": "AZTECA",
       "longName": "Banco Azteca",
-      "swiftBic": "AZTKMXMM"
+      "swiftBics": [
+        {
+          "bic": "AZTKMXMM"
+        }
+      ]
     },
     {
       "code": "128",

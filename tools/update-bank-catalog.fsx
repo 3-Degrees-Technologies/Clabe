@@ -46,10 +46,15 @@ let outputPath =
     |> Option.defaultValue defaultOutput
 
 // ---- Model -------------------------------------------------------------------
-// swiftBic is CURATED data (verified head-office BICs), not present in Banxico's
-// list. Null when the participant has no SWIFT membership. Serialized only when
-// present (WhenWritingNull below).
-type Institution = { code: string; shortName: string; longName: string; swiftBic: string }
+// swiftBics is CURATED data (verified BIC entries, optionally branch-qualified),
+// not present in Banxico's list. Carried as raw JSON so this script stays
+// agnostic to the entry shape; absent when the participant has no SWIFT
+// membership. Serialized only when present (WhenWritingNull below).
+type Institution =
+    { code: string
+      shortName: string
+      longName: string
+      swiftBics: Nullable<JsonElement> }
 
 // ---- Fetch -------------------------------------------------------------------
 let fetch (url: string) =
@@ -71,7 +76,7 @@ let parse (html: string) : Institution list =
         let code5 = m.Groups.["code"].Value
         let clabeCode = code5.Substring(2)                      // last 3 digits
         let name = WebUtility.HtmlDecode(m.Groups.["name"].Value).Trim()
-        { code = clabeCode; shortName = name; longName = name; swiftBic = null })
+        { code = clabeCode; shortName = name; longName = name; swiftBics = Nullable() })
     // Distinct 5-digit codes can share a 3-digit CLABE code; keep the first.
     |> Seq.distinctBy (fun i -> i.code)
     |> Seq.sortBy (fun i -> i.code)
@@ -102,14 +107,14 @@ let loadExisting () : Institution list =
             use doc = JsonDocument.Parse(File.ReadAllText outputPath)
             doc.RootElement.GetProperty("institutions").EnumerateArray()
             |> Seq.map (fun e ->
-                let swiftBic =
-                    match e.TryGetProperty("swiftBic") with
-                    | true, p when p.ValueKind = JsonValueKind.String -> p.GetString()
-                    | _ -> null
+                let swiftBics =
+                    match e.TryGetProperty("swiftBics") with
+                    | true, p when p.ValueKind = JsonValueKind.Array -> Nullable(p.Clone())
+                    | _ -> Nullable()
                 { code = e.GetProperty("code").GetString()
                   shortName = e.GetProperty("shortName").GetString()
                   longName = e.GetProperty("longName").GetString()
-                  swiftBic = swiftBic })
+                  swiftBics = swiftBics })
             |> List.ofSeq
         with _ -> []
     else []
@@ -133,7 +138,7 @@ let write (institutions: Institution list) =
 
 // ---- Merge -------------------------------------------------------------------
 // Banxico is authoritative for the codes it lists (fresh names); existing-only
-// codes are retained as historical entries. Curated swiftBic values ALWAYS come
+// codes are retained as historical entries. Curated swiftBics entries ALWAYS come
 // from the existing file — Banxico's list carries no BIC data, so taking the
 // live entry wholesale would silently wipe them.
 let merge (existing: Institution list) (live: Institution list) =
@@ -143,7 +148,7 @@ let merge (existing: Institution list) (live: Institution list) =
     allCodes
     |> Seq.map (fun c ->
         match Map.tryFind c liveByCode, Map.tryFind c existingByCode with
-        | Some live, Some old -> { live with swiftBic = old.swiftBic }
+        | Some live, Some old -> { live with swiftBics = old.swiftBics }
         | Some live, None -> live
         | None, Some old -> old
         | None, None -> failwith $"unreachable: code {c} in neither source")

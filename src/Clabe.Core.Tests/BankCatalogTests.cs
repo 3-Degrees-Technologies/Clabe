@@ -102,14 +102,92 @@ public class BankCatalogTests
         // ISO 9362: 8 or 11 alphanumeric characters, uppercase. Guards the
         // hand-curated data file against typos slipping into a release.
         var malformed = BankCatalog.EmbeddedDefault.Institutions
-            .Where(i => i.SwiftBic is not null)
-            .Where(i => i.SwiftBic!.Length is not (8 or 11)
-                || !i.SwiftBic.All(c => char.IsAsciiLetterUpper(c) || char.IsAsciiDigit(c)))
-            .Select(i => $"{i.Code.Value}={i.SwiftBic}")
+            .SelectMany(i => i.SwiftBics, (i, e) => (i.Code.Value, e.Bic))
+            .Where(x => x.Bic.Length is not (8 or 11)
+                || !x.Bic.All(c => char.IsAsciiLetterUpper(c) || char.IsAsciiDigit(c)))
+            .Select(x => $"{x.Value}={x.Bic}")
             .ToArray();
 
         Assert.That(malformed, Is.Empty);
     }
+
+    [Test]
+    public void SwiftBic_ShouldPickOnlyWhenUnambiguous()
+    {
+        // Single entry: identifiable.
+        Assert.That(Institution("999", Entry("TESTMXMM")).SwiftBic, Is.EqualTo("TESTMXMM"));
+
+        // Multiple entries but exactly one head office (City == null): identifiable.
+        Assert.That(
+            Institution("999", Entry("TESTMXMM"), Entry("TESTMXMMMTY", "Monterrey")).SwiftBic,
+            Is.EqualTo("TESTMXMM"));
+
+        // Multiple branch entries, no head office: ambiguous — must NOT guess.
+        Assert.That(
+            Institution("999", Entry("TESTMXMMMTY", "Monterrey"), Entry("TESTMXMMPUE", "Puebla")).SwiftBic,
+            Is.Null);
+
+        // Two head-office entries (bad data): ambiguous — must NOT guess.
+        Assert.That(
+            Institution("999", Entry("TESTMXMM"), Entry("OTHRMXMM")).SwiftBic,
+            Is.Null);
+
+        // No entries at all.
+        Assert.That(Institution("999").SwiftBic, Is.Null);
+    }
+
+    [Test]
+    public void ResolveSwiftBic_ShouldUseHintsToPickFromTheList()
+    {
+        var catalog = new BankCatalog(
+            new[]
+            {
+                Institution("999", Entry("TESTMXMM"), Entry("TESTMXMMMTY", "Monterrey")),
+                Institution("998", Entry("NOHQMXMMMTY", "Monterrey"), Entry("NOHQMXMMPUE", "Puebla"))
+            },
+            new BankCatalogSnapshot
+            {
+                AuthoritativeSource = "https://www.banxico.org.mx/cep-scl/listaInstituciones.do",
+                SeededFrom = "unit-test",
+                RetrievedOn = "2026-08-05"
+            });
+        var service = new ClabeValidationService(catalog);
+
+        // City hint matches a branch entry (case-insensitive, trimmed).
+        Assert.That(
+            service.ResolveSwiftBic("999180012345678909", new SwiftBicResolutionHints { City = "  monterrey " }),
+            Is.EqualTo("TESTMXMMMTY"));
+
+        // No hints: fall back to the unambiguous pick (head office).
+        Assert.That(service.ResolveSwiftBic("999180012345678909"), Is.EqualTo("TESTMXMM"));
+
+        // Unmatched hint: fall back to the unambiguous pick.
+        Assert.That(
+            service.ResolveSwiftBic("999180012345678909", new SwiftBicResolutionHints { City = "Cancun" }),
+            Is.EqualTo("TESTMXMM"));
+
+        // Branch-only institution: hint picks; without a hint there is no
+        // identifiable BIC and the resolver must return null, not guess.
+        Assert.That(
+            service.ResolveSwiftBic("998180012345678900", new SwiftBicResolutionHints { City = "Puebla" }),
+            Is.EqualTo("NOHQMXMMPUE"));
+        Assert.That(service.ResolveSwiftBic("998180012345678900"), Is.Null);
+
+        // Unknown bank code resolves nothing regardless of hints.
+        Assert.That(
+            service.ResolveSwiftBic("500000000000000000", new SwiftBicResolutionHints { City = "Monterrey" }),
+            Is.Null);
+    }
+
+    private static BankInstitution Institution(string code, params SwiftBicEntry[] swiftBics) => new()
+    {
+        Code = new BankCode { Value = code },
+        ShortName = "TEST BANK",
+        LongName = "Test Bank",
+        SwiftBics = swiftBics
+    };
+
+    private static SwiftBicEntry Entry(string bic, string? city = null) => new() { Bic = bic, City = city };
 
     [Test]
     public void IdentifyBank_ShouldCarrySwiftBicFromFullClabe()
