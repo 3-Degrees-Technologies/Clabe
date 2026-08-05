@@ -27,6 +27,7 @@ project last touched ~6 years ago with hardcoded, now-stale bank data, and
 - ✅ **Structural validation** — length, digits, and control digit
 - ✅ **Parsing** — bank code, plaza code, account number, control digit
 - ✅ **Bank-name resolution** — display the institution like a SWIFT/BIC lookup
+- ✅ **SWIFT/BIC resolution** — curated per-institution BIC lists with pick-only-if-identifiable semantics (`ResolveSwiftBic`)
 - ✅ **Refreshable catalog** — swap in fresh Banxico data via `IBankCatalog`
 - ✅ **Structured errors** — `ClabeValidationError` codes, not bare booleans
 - ✅ **Flexible input** — accepts spaces and hyphens
@@ -54,6 +55,22 @@ else
 
 // Resolve the bank for display (SWIFT-style), from a full or partial CLABE
 BankInstitution? bank = service.IdentifyBank("072320098765432109"); // BANORTE
+
+// An institution carries a LIST of SWIFT/BIC entries (head office + optional
+// branch-qualified codes). SPEI-only participants (fintechs, STP, …) have an
+// empty list — that's meaningful: do not guess a BIC for them.
+IReadOnlyList<SwiftBicEntry> bics = bank!.SwiftBics;
+
+// SwiftBic picks only when identifiable: the sole entry, or the sole head
+// office among several. Ambiguous lists yield null rather than a guess.
+string? bic = bank.SwiftBic; // "MENOMXMT"
+
+// When you hold extra information, let the resolver pick from the list:
+// a city hint matches branch-qualified entries, else falls back to the
+// unambiguous default, else null.
+string? branchBic = service.ResolveSwiftBic(
+    "072320098765432109",
+    new SwiftBicResolutionHints { City = "Monterrey" });
 
 // Parse into components
 if (service.TryParse("012180012345678909", out var parsed))
@@ -94,6 +111,30 @@ dotnet fsi tools/update-bank-catalog.fsx             # write the snapshot
 Refreshing may update bank names to Banxico's current forms (e.g.
 "BBVA BANCOMER" → "BBVA MEXICO"); tests assert names against a fixed catalog, not
 the shipped snapshot, so a refresh won't break the build.
+
+`swiftBics` entries are curated by hand (Banxico's list carries no BIC data) and
+are preserved as-is by the refresh script. Each entry is `{ "bic": "…" }` with an
+optional `"city"` for branch-qualified codes; the entry without a city is the
+head office. When adding one, verify it against an authoritative SWIFT directory
+first — a wrong BIC misroutes payments.
+
+### SWIFT/BIC data is best-effort, not absolute truth
+
+BICs change in the real world: banks merge (Interacciones → Banorte), split
+(Banamex separating from Citi), rename (Bansefi → Banco del Bienestar), and
+deactivate codes — and public directories lag those events by months or years.
+The bundled entries were verified against at least two independent SWIFT
+directories at curation time (see git history for dates and sources), and the
+major banks additionally against SWIFT's published SCORE participant list, but
+none of that makes them a live registry:
+
+- Treat a resolved BIC as a **strong default**, not a guarantee. For flows where
+  a misroute is costly, confirm against a SWIFTRef subscription or the
+  beneficiary's bank.
+- An empty `swiftBics` means "no BIC verified", which usually — but not
+  provably — means the institution has no SWIFT membership.
+- Corrections welcome: update the data file with two independent sources cited
+  in the commit message.
 
 ## Dependency Injection
 

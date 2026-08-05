@@ -85,7 +85,15 @@ public sealed class BankCatalog : IBankCatalog
             {
                 Code = new BankCode { Value = i.Code },
                 ShortName = i.ShortName,
-                LongName = i.LongName
+                LongName = i.LongName,
+                SwiftBics = (i.SwiftBics ?? Array.Empty<BankCatalogSwiftBicEntry>())
+                    .Where(e => !string.IsNullOrWhiteSpace(e.Bic))
+                    .Select(e => new SwiftBicEntry
+                    {
+                        Bic = e.Bic.Trim(),
+                        City = string.IsNullOrWhiteSpace(e.City) ? null : e.City.Trim()
+                    })
+                    .ToArray()
             })
             .ToArray();
 
@@ -147,6 +155,21 @@ internal sealed record BankCatalogEntry
 
     [JsonPropertyName("longName")]
     public string LongName { get; init; } = string.Empty;
+
+    [JsonPropertyName("swiftBics")]
+    public IReadOnlyList<BankCatalogSwiftBicEntry>? SwiftBics { get; init; }
+}
+
+/// <summary>
+/// DTO mirroring a single SWIFT/BIC entry in the embedded catalog JSON.
+/// </summary>
+internal sealed record BankCatalogSwiftBicEntry
+{
+    [JsonPropertyName("bic")]
+    public string Bic { get; init; } = string.Empty;
+
+    [JsonPropertyName("city")]
+    public string? City { get; init; }
 }
 
 /// <summary>

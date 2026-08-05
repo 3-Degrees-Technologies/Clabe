@@ -46,4 +46,34 @@ public interface IClabeValidationService
     /// <param name="clabe">The CLABE string. Can include spaces or hyphens.</param>
     /// <returns>The resolved <see cref="BankInstitution"/>, or null.</returns>
     BankInstitution? IdentifyBank(string? clabe);
+
+    /// <summary>
+    /// Resolves a single SWIFT/BIC for a CLABE's institution, picking from the
+    /// institution's <see cref="BankInstitution.SwiftBics"/> list only when the
+    /// choice is identifiable: a hint-matched branch entry first, otherwise the
+    /// institution's unambiguous default (<see cref="BankInstitution.SwiftBic"/>).
+    /// Returns null when the bank is unknown, has no BIC (SPEI-only participants),
+    /// or the list is ambiguous and no hint disambiguates it — a wrong BIC
+    /// misroutes payments, so the resolver never guesses.
+    /// </summary>
+    /// <param name="clabe">The CLABE string. Can include spaces or hyphens.</param>
+    /// <param name="hints">Optional extra information the caller holds (e.g. the
+    /// beneficiary's city) used to pick a branch-qualified entry.</param>
+    /// <returns>The resolved SWIFT/BIC, or null.</returns>
+    string? ResolveSwiftBic(string? clabe, SwiftBicResolutionHints? hints = null);
+}
+
+/// <summary>
+/// Extra caller-held information used by
+/// <see cref="IClabeValidationService.ResolveSwiftBic"/> to pick a
+/// branch-qualified BIC from an institution's list. All properties are optional;
+/// unset properties simply don't participate in matching.
+/// </summary>
+public sealed record SwiftBicResolutionHints
+{
+    /// <summary>
+    /// Gets the beneficiary's city, matched case-insensitively (trimmed) against
+    /// <see cref="SwiftBicEntry.City"/>.
+    /// </summary>
+    public string? City { get; init; }
 }

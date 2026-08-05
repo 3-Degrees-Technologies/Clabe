@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Text;
+
 namespace Clabe.Core;
 
 /// <summary>
@@ -126,6 +129,57 @@ public class ClabeValidationService : IClabeValidationService
         return normalized.Length >= BankCodeLength
             ? ResolveInstitution(normalized[..BankCodeLength])
             : null;
+    }
+
+    /// <inheritdoc />
+    public string? ResolveSwiftBic(string? clabe, SwiftBicResolutionHints? hints = null)
+    {
+        var institution = IdentifyBank(clabe);
+        if (institution is null)
+        {
+            return null;
+        }
+
+        if (hints?.City is { } city && !string.IsNullOrWhiteSpace(city))
+        {
+            // A hint identifies a branch entry only when it matches EXACTLY ONE.
+            // Directories list several departmental codes in the same city, so a
+            // multi-match is ambiguity, not identification — fall through to the
+            // unambiguous default rather than pick one arbitrarily.
+            var cityMatches = institution.SwiftBics
+                .Where(e => e.City is not null && CityEquals(e.City, city))
+                .Take(2)
+                .ToArray();
+            if (cityMatches.Length == 1)
+            {
+                return cityMatches[0].Bic;
+            }
+        }
+
+        return institution.SwiftBic;
+    }
+
+    /// <summary>
+    /// Compares city names for hint matching: trimmed, case-insensitive, and
+    /// accent-insensitive — Mexican city names arrive both accented and
+    /// unaccented ("León"/"Leon", "Ciudad de México"/"Ciudad de Mexico").
+    /// </summary>
+    private static bool CityEquals(string left, string right) =>
+        string.Equals(FoldCity(left), FoldCity(right), StringComparison.OrdinalIgnoreCase);
+
+    private static string FoldCity(string value)
+    {
+        var decomposed = value.Trim().Normalize(NormalizationForm.FormD);
+        var builder = new StringBuilder(decomposed.Length);
+        foreach (var c in decomposed)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            {
+                builder.Append(c);
+            }
+        }
+
+        return builder.ToString();
     }
 
     /// <summary>
