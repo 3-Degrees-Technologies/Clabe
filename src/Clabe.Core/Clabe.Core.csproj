@@ -5,12 +5,26 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Version>1.1.0</Version>
+
+    <!-- NuGet listing. -->
+    <Authors>3 Degrees Technologies</Authors>
+    <Company>3 Degrees Technologies</Company>
+    <Description>CLABE (Clave Bancaria Estandarizada) validation, parsing, and bank-name resolution for .NET. Bank catalog is sourced from a refreshable Banxico snapshot.</Description>
+    <PackageTags>clabe;mexico;banxico;spei;validation;payments;banking</PackageTags>
+    <PackageProjectUrl>https://github.com/3-Degrees-Technologies/Clabe</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/3-Degrees-Technologies/Clabe</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Description>CLABE (Clave Bancaria Estandarizada) validation, parsing, and bank-name resolution for .NET. Bank catalog is sourced from a refreshable Banxico snapshot.</Description>
+
+    <!-- Ship the XML docs so consumers get IntelliSense; 1.1.0 carried no documentation file. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Symbols as a separate .snupkg so stack traces through the package resolve. -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup>
